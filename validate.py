@@ -1,31 +1,19 @@
 from lxml import etree
 
-try:
-    # Load XML and XSD files
-    xml_tree = etree.parse("joke.xml")
-    xsd = etree.XMLSchema(etree.parse("joke.xsd"))
+xml_file = "joke.xml"
+xsl_file = "joke.xsl"
+xml_doc = etree.parse(xml_file)
+xsl_doc = etree.parse(xsl_file)
 
-    # Validate XML against XSD
-    validation_result = xsd.validate(xml_tree)
-    if validation_result:
-        print("XML validation successful.")
-    else:
-        print("XML validation failed.")
-        print("Validation errors:")
-        for error in xsd.error_log:
-            print(error)
+transform = etree.XSLT(xsl_doc)
 
-    # XSLT Transformation
-    xsl_tree = etree.parse("transform.xsl")
-    transform = etree.XSLT(xsl_tree)
-    html_output = transform(xml_tree)
+result_tree = transform(xml_doc)
 
-    # Save transformed HTML to a file
-    with open("output.html", "wb") as f:
-        f.write(etree.tostring(html_output, pretty_print=True))
+transformed_html = str(result_tree)
 
-    print("HTML transformation successful. Output saved as output.html.")
+output_html_file = "jokesoutput.html"
 
-except Exception as e:
-    print("An error occurred:")
-    print(e)
+with open(output_html_file, "w") as html_file:
+    html_file.write(transformed_html)
+
+print(f"Transformed HTML saved to {output_html_file}")
