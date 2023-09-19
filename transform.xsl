@@ -1,45 +1,62 @@
-
+<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-  <xsl:output method="html" indent="yes"/>
-
-  <xsl:template match="products">
+<xsl:template match="/jokes">
     <html>
       <head>
-        <title>Product Catalog</title>
-        <link rel="stylesheet" type="text/css" href="styles.css" />
-        <style>
-          table, th, td {
-            border: 1px solid white;
-            border-collapse: collapse;
-          }
-          th, td {
-            background-color: yellow;
-          }
-          </style>
+        <title>Jokes List</title>
       </head>
+      <style>
+        table,
+        th,
+        td {
+          color: white;
+          border: 1px solid black;
+          border-color:white;
+          margin-left: auto;
+          margin-right: auto;
+          width: 800px;
+          text-align: center;
+          font-size: 20px;
+        }
+        body {
+          margin: 40px;
+          padding: 40px;
+          background-color:rgb(125, 116, 116);
+        }
+    
+        h1 {
+          color :white;
+          display: flex;
+          justify-content: center;
+        }
+        footer{
+          position: fixed;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          background-color:black;
+          color: white;
+          text-align: center;  
+        }
+      </style> 
       <body>
-        <h1>Product Catalog</h1>
-        <table style="width:100%">
+        <h1>Jokes List</h1>
+        <table>
           <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Quantity</th>
             <th>Category</th>
+            <th>Joke</th>
           </tr>
-          <xsl:apply-templates select="product">
-            <xsl:sort select="name" data-type="text" order="ascending"/>
-          </xsl:apply-templates>
+          <xsl:for-each select="joke">
+            <tr>
+              <td><xsl:value-of select="category"/></td>
+              <td><xsl:value-of select="joke"/></td>
+            </tr>
+          </xsl:for-each>
         </table>
       </body>
+      <footer>
+        © Made by Shreya Goel. All Rights Reserved.
+      </footer>
     </html>
-  </xsl:template>
-
-  <xsl:template match="product">
-    <tr>
-      <td><xsl:value-of select="name"/></td>
-      <td>$<xsl:value-of select="format-number(price, '###0.00')"/></td>
-      <td><xsl:value-of select="quantity"/></td>
-      <td><xsl:value-of select="category"/></td>
-    </tr>
   </xsl:template>
 </xsl:stylesheet>
