@@ -1,0 +1,17 @@
+{
+    "jokes": [
+      {
+        "question": "Why don't scientists trust atoms?",
+        "answer": "Because they make up everything!"
+      },
+      {
+        "question": "Why don’t skeletons fight each other?",
+        "answer": "They don’t have the guts!"
+      },
+      {
+        "question": "Why did the scarecrow win an award?",
+        "answer": "Because he was outstanding in his field!"
+      }
+    ]
+  }
+  
